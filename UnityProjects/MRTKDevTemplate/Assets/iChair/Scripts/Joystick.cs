@@ -40,7 +40,7 @@ namespace PupilLabs
             //Debug.Log($"x: {x}, y:{y}");
         }
 
-        private void Update()
+        private void Update() //this will reset wasHit in the end, but wasHit info is from previous frame which should be OK
         {
             //send actual values
             SendData(pointer.localPosition);
@@ -53,7 +53,7 @@ namespace PupilLabs
             wasHit = false;
         }
 
-        public void OnRaycastHit(Vector3 hitPoint)
+        public void OnRaycastHit(Vector3 hitPoint) //this will be triggered during LateUpdate, so after we reset wasHit
         {
             if (FollowGaze)
             {

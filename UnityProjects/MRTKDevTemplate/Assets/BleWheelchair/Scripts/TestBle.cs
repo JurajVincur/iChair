@@ -11,8 +11,6 @@ public class TestBle : MonoBehaviour
     const string charSend = "69400002-b5a3-f393-e0a9-e50e24dcca99";
     //const string charRecv = "69400003-b5a3-f393-e0a9-e50e24dcca99";
 
-    private bool isConnected = false;
-
     private SimpleBleDevice device = null;
 
     private CancellationTokenSource cts = new CancellationTokenSource();
@@ -83,27 +81,26 @@ public class TestBle : MonoBehaviour
             }
         }, token);
 
-        // let's do this after sync so we are sure isConnected reflects the real state
-        device?.WriteCharacteristic(charServ, charSend, Crc16Modbus.AddCrcBytes(new byte[] { 242, 1, 0, 1, 0, 100 })); //TODO ensure send until success
-        device?.WriteCharacteristic(charServ, charSend, Crc16Modbus.AddCrcBytes(new byte[] { 242, 8, 6, 1, 0, 4 }));
+        if (token.IsCancellationRequested == false)
+        {
+            // let's do this after sync so we are sure isConnected reflects the real state
+            device.WriteCharacteristic(charServ, charSend, Crc16Modbus.AddCrcBytes(new byte[] { 242, 1, 0, 1, 0, 100 })); //TODO ensure send until success
+            device.WriteCharacteristic(charServ, charSend, Crc16Modbus.AddCrcBytes(new byte[] { 242, 8, 6, 1, 0, 4 }));
+
+            while (cts.IsCancellationRequested == false)
+            {
+                await Task.Run(() => WriteXY(x, y), token);
+                Debug.Log($"[TestBle] writing x:{x}, y:{y}");
+                await Task.Delay(50, token);
+            }
+        }
 
         cts.Dispose();
         cts = null;
 
-        isConnected = true;
-
-        while (isConnected)
-        {
-            await Task.Run(() => WriteXY(x, y));
-            await Task.Delay(100);
-            Debug.Log($"[TestBle] writing x:{x}, y:{y}");
-        }
-
-    }
-
-    private void Update()
-    {
-
+        device.WriteCharacteristic(charServ, charSend, Crc16Modbus.AddCrcBytes(new byte[] { 242, 8, 7, 1, 0, 4 }));
+        device.Dispose();
+        device = null;
     }
 
     private void WriteXY(byte x, byte y)
@@ -119,13 +116,6 @@ public class TestBle : MonoBehaviour
 
     private void OnDestroy()
     {
-        cts?.Cancel();
-        if (isConnected)
-        {
-            device.WriteCharacteristic(charServ, charSend, Crc16Modbus.AddCrcBytes(new byte[] { 242, 8, 7, 1, 0, 4 }));
-            isConnected = false;
-        }
-        device.Dispose();
-        device = null;
+        cts.Cancel();
     }
 }
