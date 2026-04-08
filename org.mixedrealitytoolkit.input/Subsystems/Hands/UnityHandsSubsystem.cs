@@ -64,7 +64,7 @@ namespace MixedReality.Toolkit.Input
             }
         }
 
-        private const string HandTrackingPermission = "android.permission.HAND_TRACKING";
+        private const string HandTrackingPermission = "com.picovr.permission.HAND_TRACKING";
 
         void OnPermissionDenied(string permission)
         {

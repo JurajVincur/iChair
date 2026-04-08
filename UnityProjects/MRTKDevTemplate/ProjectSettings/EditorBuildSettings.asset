@@ -36,6 +36,7 @@ EditorBuildSettings:
     path: Assets/PupilLabs/Scenes/PL_EyeTrackingTargetPositioningExample.unity
     guid: 038eca8f962add945be264dd347ca484
   m_configObjects:
+    Unity.XR.PXR.Settings: {fileID: 11400000, guid: cf2576adccce6434caf732690ff8ac27, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 87467803e919cef4394e7f39c6521b51, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: e61946fb8f8ff5e418d6ebb56cca2034, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 4ce0884cff002f24f83e8b0ceef94646, type: 2}

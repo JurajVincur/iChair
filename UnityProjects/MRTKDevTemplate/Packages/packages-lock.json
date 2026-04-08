@@ -41,15 +41,14 @@
       "url": "https://packages.unity.com"
     },
     "com.pupil-labs.neon-xr.core": {
-      "version": "https://github.com/pupil-labs/neon-xr.git?path=/com.pupil-labs.neon-xr.core",
+      "version": "file:../../../../neon-xr/com.pupil-labs.neon-xr.core",
       "depth": 0,
-      "source": "git",
+      "source": "local",
       "dependencies": {
         "com.unity.addressables": "1.21.19",
         "com.unity.inputsystem": "1.6.1",
         "com.unity.xr.interaction.toolkit": "2.3.0"
-      },
-      "hash": "4e745ac349abd440e30648896fb084ebc6df229d"
+      }
     },
     "com.unity.addressables": {
       "version": "1.21.19",
@@ -270,7 +269,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.core-utils": {
-      "version": "2.2.1",
+      "version": "2.3.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -345,7 +344,8 @@
       "source": "local",
       "dependencies": {
         "com.unity.xr.management": "4.0.0",
-        "com.unity.xr.interaction.toolkit": "2.0.0"
+        "com.unity.xr.interaction.toolkit": "2.0.0",
+        "com.unity.xr.core-utils": "2.3.0"
       }
     },
     "org.mixedrealitytoolkit.accessibility": {
