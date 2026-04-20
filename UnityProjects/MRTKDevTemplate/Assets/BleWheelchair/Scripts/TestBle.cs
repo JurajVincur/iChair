@@ -135,6 +135,17 @@ public class TestBle : MonoBehaviour
         this.y = (byte)y;
     }
 
+    public void SetXY01(float x, float y, int halfExtentX = 70, int halfExtentY = 70)
+    {
+        this.x = ConvertFrom01(x, halfExtentX);
+        this.y = ConvertFrom01(y, halfExtentY);
+    }
+
+    public byte ConvertFrom01(float v, int halfExtent)
+    {
+        return (byte)Mathf.Clamp((v - 0.5f) * (halfExtent << 1) + 128, 0f, 255f);
+    }
+
     private void OnDestroy()
     {
         cts.Cancel();
