@@ -23,7 +23,6 @@ public class DualGazeButton : MonoBehaviour
             interactable = GetComponent<StatefulInteractable>();
         }
         interactable.firstHoverEntered.AddListener(OnHover);
-        confirmInteractable.lastSelectExited.AddListener(OnConfirmSelectExited);
     }
 
     public virtual void OnHover(HoverEnterEventArgs args)
