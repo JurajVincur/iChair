@@ -17,7 +17,12 @@ public class GazeSlider : MonoBehaviour
 
     protected virtual void Step(float scale)
     {
-        slider.Value = Mathf.Clamp(slider.Value + scale * Time.deltaTime, slider.MinValue, slider.MaxValue);
+        StepByValue(scale * Time.deltaTime);
+    }
+
+    public virtual void StepByValue(float value)
+    {
+        slider.Value = Mathf.Clamp(slider.Value + value, slider.MinValue, slider.MaxValue);
     }
 
     public virtual void StepUp()
