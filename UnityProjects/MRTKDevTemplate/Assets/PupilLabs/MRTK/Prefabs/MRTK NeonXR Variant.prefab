@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77b98fe27a516842a977276e5bf156b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeThroughEnabled: 0
+  seeThroughEnabled: 1
 --- !u!114 &762696606
 MonoBehaviour:
   m_ObjectHideFlags: 0

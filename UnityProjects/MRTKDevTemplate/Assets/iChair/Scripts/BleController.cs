@@ -5,7 +5,10 @@ public abstract class BleController : MonoBehaviour
 {
     [SerializeField] protected TestBle ble;
     [SerializeField] protected GazeDataProvider gazeDataProvider;
-    [SerializeField] protected float appertureThresholdMm = 1f;
+
+    protected float appertureThresholdMm = 5f;
+    protected float appertureThresholdTime = 0.2f;
+    protected float appertureTimer = 0f;
 
     public abstract void Stop();
 
@@ -30,6 +33,14 @@ public abstract class BleController : MonoBehaviour
             Eyelid eyelid = gazeDataProvider.RawEyelid;
             float apperture = Mathf.Max(eyelid.eyelidApertureLeft, eyelid.eyelidApertureRight);
             if (apperture < appertureThresholdMm)
+            {
+                appertureTimer += Time.deltaTime;
+            }
+            else
+            {
+                appertureTimer = 0f;
+            }
+            if (appertureTimer > appertureThresholdTime)
             {
                 Stop();
             }
